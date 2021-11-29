@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        .places-section {
+            width: 550px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 20px auto;
+        }
+
+        #place {
+            border: 1px solid black;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .submit-place {
+            border: 1px solid black;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: white;
+            padding: 10px 20px;
+        }
+
+        .places {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            margin: 10px;
+            color: white;
+            font-size: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 7px;
+        }
+
+        .check {
+            width: 550px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+    <div class="places-section">
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+        <div class="places"></div>
+    </div>
+    <div class="check">
+        <input type="number"  placeholder="Your place" id="place">
+        <button class="submit-place">Submit</button>
+    </div>
+    <script>
+        let Booked = document.cookie;
+        let arrayBook = Booked.split("; ");
+        
+        for(let i = 0; i< arrayBook.length;i++){
+            let number=arrayBook[i].split("").reverse().join('')
+           let numberPlace= "";
+            for(let i = 0; i< number.length;i++){
+               if(number[i] == "="){
+                   break;
+               }else{
+                   numberPlace+=number[i]
+               }
+           }
+           numberPlace = numberPlace.split("").reverse().join("")
+           document.getElementsByClassName("places")[numberPlace].style.background = "red";
+        }
+        for (let i = 0; i < document.getElementsByClassName("places").length; i++) {
+            document.getElementsByClassName("places")[i].textContent = i + 1;
+        }
+        document.getElementsByClassName("submit-place")[0].addEventListener("click", Book)
+
+        function Book() {
+            if (document.getElementById("place").value == '' || (parseInt(document.getElementById("place").value) <=0 && parseInt(document.getElementById("place").value) >=21)) {
+                alert('Please write your sit!')
+            } else if (document.getElementsByClassName("places")[parseInt(document.getElementById("place").value) - 1].style.background == 'red') {
+                alert("Sorry! But this place was booked!")
+                document.getElementById("place").value = ''
+            } else {
+                let placeNumber = parseInt(document.getElementById("place").value) - 1;
+                document.getElementsByClassName("places")[placeNumber].style.background = 'red';
+                document.cookie = `place${placeNumber+1}=${placeNumber}`
+                document.getElementById("place").value = ''
+            }
+        }
+    </script>
+</body>
+
+</html>
