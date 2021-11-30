@@ -93,7 +93,9 @@
                }
            }
            numberPlace = numberPlace.split("").reverse().join("")
-           document.getElementsByClassName("places")[numberPlace].style.background = "red";
+           if(numberPlace === parseInt(numberPlace)){
+           document.getElementsByClassName("places")[parseInt(numberPlace)].style.background = "red";
+           }
         }
         for (let i = 0; i < document.getElementsByClassName("places").length; i++) {
             document.getElementsByClassName("places")[i].textContent = i + 1;
